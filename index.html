@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rádio FM Armação dos Búzios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .player {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0f1a4a;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a2a6c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rádio FM Armação dos Búzios</h1>
+        <p>A voz da nossa comunidade!</p>
+    </header>
+    
+    <div class="container">
+        <div class="player">
+            <h2>Ouça ao vivo</h2>
+            <audio id="radioStream" controls>
+                <source src="https://stm3.hoststreaming.com.br:7014/;?type=http&nocache=2" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+            <p id="status">Rádio offline</p>
+            <button onclick="togglePlay()">Play/Stop</button>
+        </div>
+        
+        <h2>Sobre nós</h2>
+        <p>Bem-vindo à Rádio FM de Armação dos Búzios, transmitindo para toda a região com a melhor programação musical e informações locais.</p>
+        
+        <h2>Programação</h2>
+        <ul>
+            <li>Manhã: Música local e notícias</li>
+            <li>Tarde: Programas de entrevistas</li>
+            <li>Noite: Música ao vivo e eventos</li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Rádio FM Armação dos Búzios. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const audioPlayer = document.getElementById('radioStream');
+        const statusText
