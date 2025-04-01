@@ -18,7 +18,7 @@
                 <h1>Rádio Líder</h1>
                 <p class="slogan">Búzios FM 98.7</p>
                 <div class="live-badge">
-                    <i class="fas fa-circle"></i> TRANSMISSÃO AO VIVO
+                    <i class="fas fa-circle"></i> AO VIVO
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <h2><i class="fas fa-wave-square"></i> Rádio AO VIVO</h2>
             <div class="player-container">
                 <div class="now-playing">
-                    <div id="current-song">Carregando programação...</div>
+                    <div id="current-song">Carregando...</div>
                 </div>
                 <div class="player-controls">
                     <button class="btn btn-play" onclick="togglePlay()">
@@ -70,63 +70,81 @@
             </div>
         </section>
 
-        <!-- PREVISÃO DO TEMPO -->
-        <section id="tempo" class="card weather-section">
-            <h2><i class="wi wi-barometer"></i> Tempo em Búzios</h2>
-            <div class="weather-current">
-                <div class="weather-icon">
-                    <i class="wi"></i>
-                </div>
-                <div class="weather-info">
-                    <div class="temp">Carregando...</div>
-                    <div class="condition">Carregando...</div>
-                    <div class="details">
-                        <div><i class="wi wi-humidity"></i> Carregando...</div>
-                        <div><i class="wi wi-strong-wind"></i> Carregando...</div>
-                    </div>
-                </div>
+       <!-- PREVISÃO DO TEMPO -->
+<section id="tempo" class="card weather-section">
+    <h2><i class="wi wi-barometer"></i> Tempo em Búzios</h2>
+    <div class="weather-current">
+        <div class="temp-container">
+            <div class="weather-icon">
+                <i class="wi"></i>
             </div>
-            <div class="weather-forecast">
-                <div class="forecast-container"></div>
+            <div class="temp-info">
+                <div class="temp">Carregando...</div>
+                <div class="condition">Carregando...</div>
             </div>
-        </section>
-
-        <!-- CÂMERAS -->
-<section id="cameras" class="card cameras-section">
-    <h2><i class="fas fa-video"></i> Câmeras Ao Vivo</h2>
-    <div class="cameras-grid">
-        <div class="camera-card">
-            <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/774408/undefined/undefined/chez-pitu-lado-esquerdo?autoplay=true&sound=true" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Chez Pitu - Esquerda</div>
         </div>
-        <div class="camera-card">
-            <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/779592/undefined/undefined/chez-pitu-lado-direito?autoplay=true&sound=true" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Chez Pitu - Direita</div>
-        </div>
-        <div class="camera-card">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Praia de Geribá</div>
-        </div>
-        <div class="camera-card">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Rua das Pedras</div>
-        </div>
-        <div class="camera-card">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Porto da Barra</div>
-        </div>
-        <div class="camera-card">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
-                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
-            <div class="camera-label">Praia da Ferradura</div>
+        <div class="weather-details">
+            <div class="details">
+                <div><i class="wi wi-thermometer"></i> Sensação: <span class="feels-like">Carregando...</span></div>
+                <div><i class="wi wi-humidity"></i> Umidade: <span class="humidity">Carregando...</span></div>
+                <div><i class="wi wi-strong-wind"></i> Vento: <span class="wind">Carregando...</span></div>
+                <div><i class="wi wi-direction-up"></i> Direção: <span class="wind-direction">Carregando...</span></div>
+                <div><i class="wi wi-raindrop"></i> Chuva: <span class="rain">Carregando...</span></div>
+                <div><i class="wi wi-day-sunny"></i> UV: <span class="uv-index">Carregando...</span></div>
+            </div>
         </div>
     </div>
+    <div class="weather-daily">
+        <div class="daily-info">
+            <div><i class="wi wi-sunrise"></i> Nascer do Sol: <span class="sunrise">Carregando...</span></div>
+            <div><i class="wi wi-day-sunny"></i> Duração do Dia: <span class="daylight">Carregando...</span></div>
+            <div><i class="wi wi-thermometer"></i> Máx/Mín: <span class="temp-range">Carregando...</span></div>
+        </div>
+    </div>
+    <div class="weather-forecast">
+        <div class="forecast-container"></div>
+    </div>
 </section>
+
+        <!-- CÂMERAS -->
+        <section id="cameras" class="card cameras-section">
+            <h2><i class="fas fa-video"></i> Câmeras Ao Vivo</h2>
+            <div class="cameras-grid">
+                <div class="camera-card">
+                    <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/774408/undefined/undefined/chez-pitu-lado-esquerdo?autoplay=true&sound=true" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Chez Pitu - Esquerda</div>
+                </div>
+                <div class="camera-card">
+                    <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/779592/undefined/undefined/chez-pitu-lado-direito?autoplay=true&sound=true" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Chez Pitu - Direita</div>
+                </div>
+                <!-- Câmeras adicionais escondidas no celular -->
+                <div class="camera-card hidden-mobile">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Praia de Geribá</div>
+                </div>
+                <div class="camera-card hidden-mobile">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Rua das Pedras</div>
+                </div>
+                <div class="camera-card hidden-mobile">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Porto da Barra</div>
+                </div>
+                <div class="camera-card hidden-mobile">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                            allow="autoplay" allowfullscreen loading="lazy"></iframe>
+                    <div class="camera-label">Praia da Ferradura</div>
+                </div>
+            </div>
+            <button class="btn see-more" onclick="toggleCameras()">Ver Mais</button>
+        </section>
+
         <!-- NOTÍCIAS -->
         <section id="noticias" class="card news-section">
             <h2><i class="fas fa-newspaper"></i> Destaques</h2>
@@ -135,7 +153,7 @@
                     <div class="news-image" style="background-image: url('https://source.unsplash.com/random/600x400/?beach')"></div>
                     <div class="news-content">
                         <h3>Festival de Gastronomia</h3>
-                        <p>Evento reúne chefs renomados...</p>
+                        <p>Evento reúne chefs...</p>
                         <a href="#">Saiba mais <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
@@ -144,7 +162,7 @@
 
         <!-- ANUNCIANTES -->
         <section class="card advertisers-section">
-            <h2><i class="fas fa-star"></i> Nossos Parceiros</h2>
+            <h2><i class="fas fa-star"></i> Parceiros</h2>
             <div class="ad-carousel">
                 <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
                 <div class="ad-items">
