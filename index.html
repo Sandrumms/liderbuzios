@@ -3,411 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rádio Líder Búzios FM 98.7 - A Voz de Armação dos Búzios. Ouça online nossa programação musical e notícias locais.">
-    <meta name="keywords" content="rádio, Búzios, FM 98.7, música, notícias, online">
-    <title>Rádio Líder Búzios FM 98.7 - A Voz de Armação dos Búzios</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #000080;
-            --secondary-color: #1a2a6c;
-            --accent-color: #f8c537;
-            --text-color: #333;
-            --light-bg: #f8f8f8;
-            --white: #ffffff;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23f8c537"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23f8c537"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f8c537"/></svg>');
-            background-size: cover;
-        }
-        
-        .logo {
-            max-width: 150px;
-            margin-bottom: 15px;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 25px;
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .player {
-            background-color: var(--light-bg);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid #e1e1e1;
-        }
-        
-        .player-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        button {
-            background-color: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        button:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .btn-play {
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            padding: 15px 30px;
-        }
-        
-        .btn-play:hover {
-            background-color: #e0b42f;
-        }
-        
-        .now-playing {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .now-playing i {
-            color: var(--accent-color);
-            font-size: 24px;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .social-links a {
-            color: var(--secondary-color);
-            font-size: 24px;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: scale(1.2);
-        }
-        
-        .programacao-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .programa-card {
-            background-color: var(--light-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .programa-card h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            margin-top: 40px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        
-        .footer-links a {
-            color: var(--white);
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin: 15px;
-            }
-            
-            .player-controls {
-                flex-direction: column;
-            }
-            
-            button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <title>Rádio Líder Búzios FM 98.7</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <img src="https://liderbuzios.com.br/logo-radio-lider-buzios.jpeg" alt="Logo Rádio Líder" class="logo">
-        <h1>Líder Búzios FM 98.7</h1>
-        <p>A Voz de Armação dos Búzios</p>
-        <div class="header-wave"></div>
+    <!-- CABEÇALHO -->
+    <header class="header-com-imagem">
+        <div class="header-overlay"></div>
+        <div class="header-container">
+            <img src="https://guiaviajarmelhor.com.br/wp-content/uploads/2020/05/buzios.jpg" alt="Rádio Líder" class="logo">
+            <div class="header-titles">
+                <h1>Rádio Líder</h1>
+                <p class="slogan">Búzios FM 98.7</p>
+                <div class="live-badge">
+                    <i class="fas fa-circle"></i> TRANSMISSÃO AO VIVO
+                </div>
+            </div>
+        </div>
     </header>
-    
-    <div class="container">
-        <div class="player">
-            <h2><i class="fas fa-broadcast-tower"></i> Ouça ao vivo</h2>
-            
-            <div class="now-playing">
-                <i class="fas fa-music"></i>
-                <div>
-                    <div id="current-song">Tocando agora: Carregando...</div>
-                    <div id="current-program">Programa: Carregando...</div>
+
+    <!-- MENU -->
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="#radio" class="active"><i class="fas fa-broadcast-tower"></i> Rádio</a></li>
+            <li><a href="#youtube-live"><i class="fab fa-youtube"></i> Ao Vivo</a></li>
+            <li><a href="#tempo"><i class="fas fa-cloud-sun"></i> Tempo</a></li>
+            <li><a href="#cameras"><i class="fas fa-video"></i> Câmeras</a></li>
+            <li><a href="#noticias"><i class="fas fa-newspaper"></i> Notícias</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="tetris-grid">
+        <!-- PLAYER -->
+        <section id="radio" class="card player-section">
+            <h2><i class="fas fa-wave-square"></i> Rádio AO VIVO</h2>
+            <div class="player-container">
+                <div class="now-playing">
+                    <div id="current-song">Carregando programação...</div>
+                </div>
+                <div class="player-controls">
+                    <button class="btn btn-play" onclick="togglePlay()">
+                        <i class="fas fa-play" id="playIcon"></i>
+                        <span id="playText">Ouvir</span>
+                    </button>
+                    <div class="volume-controls">
+                        <button onclick="adjustVolume(-0.1)"><i class="fas fa-volume-down"></i></button>
+                        <input type="range" min="0" max="1" step="0.1" value="0.7" id="volumeSlider">
+                        <button onclick="adjustVolume(0.1)"><i class="fas fa-volume-up"></i></button>
+                    </div>
                 </div>
             </div>
-            
-            <audio id="radioStream" controls>
+            <audio id="radioStream">
                 <source src="https://stm3.hoststreaming.com.br:7014/;?type=http&nocache=2" type="audio/mpeg">
-                Seu navegador não suporta o elemento de áudio.
             </audio>
-            
-            <div class="player-controls">
-                <button class="btn-play" onclick="togglePlay()">
-                    <i class="fas fa-play" id="playIcon"></i>
-                    <span id="playText">Ouvir Rádio</span>
-                </button>
-                <button onclick="adjustVolume(0.1)">
-                    <i class="fas fa-volume-up"></i> Volume +
-                </button>
-                <button onclick="adjustVolume(-0.1)">
-                    <i class="fas fa-volume-down"></i> Volume -
-                </button>
+        </section>
+
+        <!-- YOUTUBE AO VIVO -->
+        <section id="youtube-live" class="card youtube-section">
+            <h2><i class="fab fa-youtube"></i> Transmissão ao Vivo</h2>
+            <div class="youtube-container">
+                <iframe src="https://www.youtube.com/embed/ID_DO_SEU_VIDEO?autoplay=1&mute=1" 
+                        allow="autoplay" allowfullscreen loading="lazy"></iframe>
             </div>
-            
-            <div class="social-links">
-                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </section>
+
+        <!-- PREVISÃO DO TEMPO -->
+        <section id="tempo" class="card weather-section">
+            <h2><i class="wi wi-barometer"></i> Tempo em Búzios</h2>
+            <div class="weather-current">
+                <div class="weather-icon">
+                    <i class="wi"></i>
+                </div>
+                <div class="weather-info">
+                    <div class="temp">Carregando...</div>
+                    <div class="condition">Carregando...</div>
+                    <div class="details">
+                        <div><i class="wi wi-humidity"></i> Carregando...</div>
+                        <div><i class="wi wi-strong-wind"></i> Carregando...</div>
+                    </div>
+                </div>
             </div>
+            <div class="weather-forecast">
+                <div class="forecast-container"></div>
+            </div>
+        </section>
+
+        <!-- CÂMERAS -->
+<section id="cameras" class="card cameras-section">
+    <h2><i class="fas fa-video"></i> Câmeras Ao Vivo</h2>
+    <div class="cameras-grid">
+        <div class="camera-card">
+            <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/774408/undefined/undefined/chez-pitu-lado-esquerdo?autoplay=true&sound=true" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Chez Pitu - Esquerda</div>
         </div>
-        
-        <section>
-            <h2><i class="fas fa-info-circle"></i> Sobre nós</h2>
-            <p>Bem-vindo à Rádio Líder em Armação dos Búzios, transmitindo para toda a região na frequência FM 98.7 com a melhor programação musical, notícias locais e entretenimento de qualidade. Nossa equipe está comprometida em levar até você conteúdo relevante e diversificado, conectando nossa comunidade.</p>
-            <p>Através do nosso streaming online, levamos a essência de Búzios para ouvintes em todos os cantos do planeta, promovendo nossa cultura e mantendo nossos conterrâneos informados onde quer que estejam.</p>
-        </section>
-        
-        <section>
-            <h2><i class="fas fa-calendar-alt"></i> Programação</h2>
-            <div class="programacao-grid">
-                <div class="programa-card">
-                    <h3>Manhã Líder (6h - 12h)</h3>
-                    <p><i class="far fa-clock"></i> Segunda a Sexta</p>
-                    <p>Música local, notícias da cidade, previsão do tempo, trânsito e entrevistas com personalidades locais.</p>
-                </div>
-                <div class="programa-card">
-                    <h3>Tarde Total (12h - 18h)</h3>
-                    <p><i class="far fa-clock"></i> Todos os dias</p>
-                    <p>Programas de entrevistas, música popular brasileira e os sucessos que todo mundo canta junto.</p>
-                </div>
-                <div class="programa-card">
-                    <h3>Noite Vibrante (18h - 0h)</h3>
-                    <p><i class="far fa-clock"></i> Sexta e Sábado</p>
-                    <p>Música ao vivo, cobertura de eventos locais e os melhores hits para animar sua noite.</p>
-                </div>
-                <div class="programa-card">
-                    <h3>Madrugada Suave (0h - 6h)</h3>
-                    <p><i class="far fa-clock"></i> Todos os dias</p>
-                    <p>Música relaxante e programação automática para acompanhar seu descanso.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h2><i class="fas fa-map-marker-alt"></i> Onde estamos</h2>
-            <div style="height: 300px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 15px;">
-                <p>Mapa de localização da Rádio Líder em Búzios</p>
-            </div>
-            <p style="text-align: center; margin-top: 10px;">
-                <i class="fas fa-phone"></i> (22) 2623-XXXX | 
-                <i class="fas fa-envelope"></i> contato@radioliderbuzios.com.br
-            </p>
-        </section>
+        <div class="camera-card">
+            <iframe src="https://marcelo-dos-santos-souza.camerite.com/embed/779592/undefined/undefined/chez-pitu-lado-direito?autoplay=true&sound=true" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Chez Pitu - Direita</div>
+        </div>
+        <div class="camera-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Praia de Geribá</div>
+        </div>
+        <div class="camera-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Rua das Pedras</div>
+        </div>
+        <div class="camera-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Porto da Barra</div>
+        </div>
+        <div class="camera-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+                    allow="autoplay" allowfullscreen loading="lazy"></iframe>
+            <div class="camera-label">Praia da Ferradura</div>
+        </div>
     </div>
-    
+</section>
+        <!-- NOTÍCIAS -->
+        <section id="noticias" class="card news-section">
+            <h2><i class="fas fa-newspaper"></i> Destaques</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image" style="background-image: url('https://source.unsplash.com/random/600x400/?beach')"></div>
+                    <div class="news-content">
+                        <h3>Festival de Gastronomia</h3>
+                        <p>Evento reúne chefs renomados...</p>
+                        <a href="#">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ANUNCIANTES -->
+        <section class="card advertisers-section">
+            <h2><i class="fas fa-star"></i> Nossos Parceiros</h2>
+            <div class="ad-carousel">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="ad-items">
+                    <div class="ad-item">
+                        <img src="anunciante1.jpg" alt="Restaurante Praiano" loading="lazy">
+                        <div class="ad-label">10% OFF</div>
+                    </div>
+                    <div class="ad-item">
+                        <img src="anunciante2.jpg" alt="Pousada Maré" loading="lazy">
+                        <div class="ad-label">Temporada</div>
+                    </div>
+                </div>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
     <footer>
-        <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">Programação</a>
-            <a href="#">Publicidade</a>
-            <a href="#">Contato</a>
-            <a href="#">Equipe</a>
+        <div class="footer-content">
+            <p>© 2025 Rádio Líder Búzios</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
         </div>
-        <p>&copy; 2025 Rádio Líder FM 98.7 - Armação dos Búzios/RJ</p>
-        <p>Todos os direitos reservados</p>
     </footer>
 
-    <script>
-        const audioPlayer = document.getElementById('radioStream');
-        const playIcon = document.getElementById('playIcon');
-        const playText = document.getElementById('playText');
-        const currentSongElement = document.getElementById('current-song');
-        const currentProgramElement = document.getElementById('current-program');
-        
-        // Simulação de dados da programação atual (substituir por dados reais da API da rádio)
-        const programacao = {
-            manha: {
-                nome: "Manhã Líder",
-                horario: "6h às 12h",
-                responsavel: "Carlos Silva"
-            },
-            tarde: {
-                nome: "Tarde Total",
-                horario: "12h às 18h",
-                responsavel: "Ana Paula"
-            },
-            noite: {
-                nome: "Noite Vibrante",
-                horario: "18h às 0h",
-                responsavel: "DJ Marcelo"
-            },
-            madrugada: {
-                nome: "Madrugada Suave",
-                horario: "0h às 6h",
-                responsavel: "Programação Automática"
-            }
-        };
-        
-        // Músicas fictícias para demonstração
-        const playlist = [
-            { artista: "Jorge Ben Jor", musica: "Búzios Tropicália" },
-            { artista: "Tim Maia", musica: "Descobridor dos Sete Mares" },
-            { artista: "Artistas Locais", musica: "Sucessos de Búzios" },
-            { artista: "Maria Bethânia", musica: "Mar de Búzios" },
-            { artista: "Gilberto Gil", musica: "Aquele Abraço" }
-        ];
-        
-        function togglePlay() {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playIcon.classList.remove('fa-play');
-                playIcon.classList.add('fa-pause');
-                playText.textContent = "Pausar Rádio";
-            } else {
-                audioPlayer.pause();
-                playIcon.classList.remove('fa-pause');
-                playIcon.classList.add('fa-play');
-                playText.textContent = "Ouvir Rádio";
-            }
-        }
-        
-        function adjustVolume(change) {
-            let volume = audioPlayer.volume + change;
-            if (volume > 1) volume = 1;
-            if (volume < 0) volume = 0;
-            audioPlayer.volume = volume;
-        }
-        
-        // Simular a música atual e programa
-        function updateNowPlaying() {
-            const now = new Date();
-            const hours = now.getHours();
-            
-            let currentProgram;
-            
-            if (hours >= 6 && hours < 12) {
-                currentProgram = programacao.manha;
-            } else if (hours >= 12 && hours < 18) {
-                currentProgram = programacao.tarde;
-            } else if (hours >= 18 && hours < 24) {
-                currentProgram = programacao.noite;
-            } else {
-                currentProgram = programacao.madrugada;
-            }
-            
-            // Selecionar música aleatória da playlist
-            const randomSong = playlist[Math.floor(Math.random() * playlist.length)];
-            
-            currentSongElement.textContent = `Tocando agora: ${randomSong.musica} - ${randomSong.artista}`;
-            currentProgramElement.textContent = `Programa: ${currentProgram.nome} (${currentProgram.horario}) com ${currentProgram.responsavel}`;
-        }
-        
-        // Atualizar a cada 30 segundos (simulando mudança de música)
-        updateNowPlaying();
-        setInterval(updateNowPlaying, 30000);
-        
-        // Configurar volume inicial
-        audioPlayer.volume = 0.7;
-        
-        // Verificar se o áudio está tocando quando a página carrega
-        audioPlayer.addEventListener('play', function() {
-            playIcon.classList.remove('fa-play');
-            playIcon.classList.add('fa-pause');
-            playText.textContent = "Pausar Rádio";
-        });
-        
-        audioPlayer.addEventListener('pause', function() {
-            playIcon.classList.remove('fa-pause');
-            playIcon.classList.add('fa-play');
-            playText.textContent = "Ouvir Rádio";
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
