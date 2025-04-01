@@ -97,6 +97,7 @@ body {
 
 .nav-menu {
     display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha no mobile */
     justify-content: center;
     list-style: none;
     gap: 0.5rem;
@@ -128,7 +129,7 @@ body {
     margin: 0 auto;
     padding: var(--gap);
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Uma coluna no mobile */
     gap: var(--gap);
 }
 
@@ -168,7 +169,7 @@ body {
 
 /* PLAYER */
 .player-section {
-    grid-area: radio;
+    grid-area: auto; /* Remove áreas específicas no mobile */
 }
 
 .player {
@@ -187,6 +188,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap; /* Permite quebra no mobile */
 }
 
 .btn {
@@ -225,7 +227,7 @@ body {
 
 /* YOUTUBE */
 .youtube-section {
-    grid-area: youtube;
+    grid-area: auto;
 }
 
 .youtube-player {
@@ -246,13 +248,13 @@ body {
 
 /* TEMPO */
 .weather-section {
-    grid-area: tempo;
+    grid-area: auto;
 }
 
 .weather-current {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Fallback */
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     background-size: cover;
     background-position: center;
     color: white;
@@ -389,9 +391,15 @@ body {
     font-weight: 700;
 }
 
+.forecast-item .precip-prob {
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 0.3rem;
+}
+
 /* CÂMERAS */
 .cameras-section {
-    grid-area: cameras;
+    grid-area: auto;
 }
 
 .cameras-container {
@@ -441,7 +449,7 @@ body {
 
 /* NOTÍCIAS */
 .news-section {
-    grid-area: noticias;
+    grid-area: auto;
 }
 
 .news-container {
@@ -490,7 +498,7 @@ body {
 
 /* ANUNCIANTES */
 .partners-section {
-    grid-area: ads;
+    grid-area: auto;
 }
 
 .carousel {
@@ -600,18 +608,27 @@ body {
         font-size: 0.9rem;
         padding: 0.5rem 1.2rem;
     }
+    .nav-menu {
+        flex-wrap: nowrap; /* Sem quebra no desktop */
+    }
     .nav-menu a {
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
     }
     .grid-container {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr); /* Tetris no desktop */
         grid-template-areas: 
             "radio radio youtube youtube"
             "tempo tempo cameras cameras"
             "noticias noticias cameras cameras"
             "ads ads ads ads";
     }
+    .player-section { grid-area: radio; }
+    .youtube-section { grid-area: youtube; }
+    .weather-section { grid-area: tempo; }
+    .cameras-section { grid-area: cameras; }
+    .news-section { grid-area: noticias; }
+    .partners-section { grid-area: ads; }
     .weather-current {
         flex-direction: row;
         align-items: flex-start;
@@ -647,6 +664,9 @@ body {
     .forecast-item i {
         font-size: 1.8rem;
     }
+    .forecast-item .precip-prob {
+        font-size: 0.8rem;
+    }
     .cameras-container {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, auto);
@@ -672,14 +692,5 @@ body {
     }
     .carousel-item img {
         height: 140px;
-    }
-    .forecast-item .precip-prob {
-    font-size: 0.7rem;
-    color: #555;
-    margin-top: 0.3rem;
-    }
-     @media (min-width: 768px) {
-    .forecast-item .precip-prob {
-        font-size: 0.8rem;
     }
 }
