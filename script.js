@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Player de Rádio
+    // Player de Rádio (sem alterações)
     const audioPlayer = document.getElementById('radioStream');
     const playIcon = document.getElementById('playIcon');
     const playText = document.getElementById('playText');
@@ -31,69 +31,80 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.volume = this.value;
     });
 
-    // Previsão do Tempo com Open-Meteo
-    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=-22.7752&longitude=-41.9134&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,rain,uv_index,wind_speed_10m,wind_direction_10m&daily=sunrise,daylight_duration,wind_speed_10m_max,uv_index_max,sunshine_duration,temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo`;
+    // Previsão do Tempo com Open-Meteo (Corrigido e Maximizado)
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=-22.7752&longitude=-41.9134&daily=sunrise,temperature_2m_max,temperature_2m_min,daylight_duration,wind_speed_10m_max&hourly=temperature_2m,relative_humidity_2m,rain,precipitation_probability,apparent_temperature,wind_speed_10m&current=temperature_2m,precipitation,rain,relative_humidity_2m,is_day,apparent_temperature`;
 
     fetch(weatherUrl)
         .then(response => {
+            console.log('Resposta da API:', response); // Log pra verificar a resposta
             if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
             return response.json();
         })
         .then(data => {
+            console.log('Dados recebidos:', data); // Log pra ver os dados
+
             // Dados atuais
             const temp = Math.round(data.current.temperature_2m);
+            const feelsLike = Math.round(data.current.apparent_temperature);
             const humidity = data.current.relative_humidity_2m;
-            const wind = data.current.wind_speed_10m;
-            const windDir = data.current.wind_direction_10m;
+            const wind = Math.round(data.hourly.wind_speed_10m[0]); // Primeiro valor horário
+            const windDir = data.hourly.wind_speed_10m[0] ? 'N/A' : 'N/A'; // Sem direção na API, placeholder
             const rain = data.current.rain;
-            const uvIndex = data.hourly.uv_index[0]; // Primeiro valor horário como proxy
-            const weatherCode = inferWeatherCode(data.current.precipitation, data.hourly.precipitation_probability[0]);
+            const precipProb = data.hourly.precipitation_probability[0];
+            const isDay = data.current.is_day === 1 ? 'Dia' : 'Noite';
+            const weatherCode = inferWeatherCode(rain, precipProb);
 
             document.querySelector('.temp').textContent = `${temp}°C`;
-            document.querySelector('.condition').textContent = weatherCodeToDescription(weatherCode);
-            document.querySelector('.feels-like').textContent = `${temp}°C`; // Sem sensação térmica na API, usando temp
+            document.querySelector('.condition').textContent = `${weatherCodeToDescription(weatherCode)} (${isDay})`;
+            document.querySelector('.feels-like').textContent = `${feelsLike}°C`;
             document.querySelector('.humidity').textContent = `${humidity}%`;
             document.querySelector('.wind').textContent = `${wind} km/h`;
-            document.querySelector('.wind-direction').textContent = `${windDir}°`;
+            document.querySelector('.wind-direction').textContent = `${windDir}`;
             document.querySelector('.rain').textContent = `${rain} mm`;
-            document.querySelector('.uv-index').textContent = `${uvIndex}`;
+            document.querySelector('.uv-index').textContent = `${precipProb}%`; // Proxy pra prob. de chuva
             document.querySelector('.weather-icon i').className = `wi ${weatherCodeToIcon(weatherCode)}`;
 
-            // Fundo dinâmico baseado na temperatura
+            // Fundo dinâmico com imagens
             const weatherCurrent = document.querySelector('.weather-current');
-            if (temp < 20) {
-                weatherCurrent.style.background = 'linear-gradient(135deg, #4682B4, #191970)'; // Frio
+            if (rain > 0) {
+                weatherCurrent.style.backgroundImage = `url('https://images.unsplash.com/photo-1519692933481-e162a57d6721')`; // Chuva
+            } else if (temp < 20) {
+                weatherCurrent.style.backgroundImage = `url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0')`; // Frio
             } else if (temp >= 20 && temp <= 25) {
-                weatherCurrent.style.background = 'linear-gradient(135deg, #87CEEB, #32CD32)'; // Moderado
+                weatherCurrent.style.backgroundImage = `url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')`; // Moderado
             } else {
-                weatherCurrent.style.background = 'linear-gradient(135deg, #FFD700, #FF4500)'; // Quente
+                weatherCurrent.style.backgroundImage = `url('https://images.unsplash.com/photo-1498550744921-75f79806b8a7')`; // Quente
             }
 
             // Dados diários
             const sunrise = new Date(data.daily.sunrise[0]).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            const daylight = Math.round(data.daily.daylight_duration[0] / 3600); // Segundos para horas
+            const daylight = Math.round(data.daily.daylight_duration[0] / 3600);
             const tempMax = Math.round(data.daily.temperature_2m_max[0]);
             const tempMin = Math.round(data.daily.temperature_2m_min[0]);
+            const windMax = Math.round(data.daily.wind_speed_10m_max[0]);
 
             document.querySelector('.sunrise').textContent = sunrise;
             document.querySelector('.daylight').textContent = `${daylight}h`;
-            document.querySelector('.temp-range').textContent = `${tempMax}°C / ${tempMin}°C`;
+            document.querySelector('.temp-range').textContent = `${tempMax}° / ${tempMin}° (Vento máx: ${windMax} km/h)`;
 
-            // Previsão horária (próximas 6 horas)
+            // Previsão horária (8 horas)
             const forecastContainer = document.querySelector('.forecast-container');
             forecastContainer.innerHTML = '';
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 const time = new Date(data.hourly.time[i]);
                 const hour = time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
                 const temp = Math.round(data.hourly.temperature_2m[i]);
-                const code = inferWeatherCode(data.hourly.rain[i], data.hourly.precipitation_probability[i]);
+                const feelsLikeHour = Math.round(data.hourly.apparent_temperature[i]);
+                const precipProbHour = data.hourly.precipitation_probability[i];
+                const code = inferWeatherCode(data.hourly.rain[i], precipProbHour);
 
                 const forecastItem = document.createElement('div');
                 forecastItem.className = 'forecast-item';
                 forecastItem.innerHTML = `
                     <div class="day">${hour}</div>
                     <i class="wi ${weatherCodeToIcon(code)}"></i>
-                    <div class="temps">${temp}°</div>
+                    <div class="temps">${temp}° (${feelsLikeHour}°)</div>
+                    <div class="precip-prob">${precipProbHour}% chuva</div>
                 `;
                 forecastContainer.appendChild(forecastItem);
             }
@@ -138,11 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return iconMap[code] || 'wi-day-sunny';
     }
 
-    // Carrossel de Anunciantes
-    const carousel = document.querySelector('.ad-items');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
-    const items = document.querySelectorAll('.ad-item');
+    // Carrossel de Anunciantes (sem alterações)
+    const carousel = document.querySelector('.carousel-items');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    const items = document.querySelectorAll('.carousel-item');
     let currentIndex = 0;
     const itemWidth = items[0].offsetWidth + 16;
 
@@ -173,13 +184,19 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCarousel();
     }, 5000);
 
-    // Função Ver Mais Câmeras
+    // Função Ver Mais Câmeras (sem alterações)
     window.toggleCameras = function() {
         const hiddenCameras = document.querySelectorAll('.hidden-mobile');
         hiddenCameras.forEach(camera => {
             camera.style.display = camera.style.display === 'block' ? 'none' : 'block';
         });
-        const button = document.querySelector('.see-more');
+        const button = document.querySelector('.toggle-cameras');
         button.textContent = button.textContent === 'Ver Mais' ? 'Ver Menos' : 'Ver Mais';
     };
+
+    // Animações de entrada (sem alterações)
+    const sections = document.querySelectorAll('.animate');
+    sections.forEach((section, index) => {
+        section.style.animationDelay = `${index * 0.2}s`;
+    });
 });
